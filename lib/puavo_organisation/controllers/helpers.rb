@@ -1,6 +1,12 @@
 module PuavoOrganisation
   module Controllers
     module Helpers
+      def self.included(controller)
+        controller.class_eval do  
+          before_filter :set_organisation_to_session, :set_locale
+          helper_method :theme
+        end
+      end
       def set_organisation_to_session
         if session[:organisation].nil?
           # Find organisation by request.host.
