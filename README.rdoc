@@ -1,5 +1,4 @@
-Puavo Organisation
-=================
+== Puavo Organisation
 
 This is required plugin on the Puavo Users. Read more from the Puavo Users page. 
 
