@@ -7,9 +7,9 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/opinsys/puavo_organisation"
   s.platform = Gem::Platform::RUBY
   s.summary = "Puavo organisation support"
-  s.files = ["Rakefile", "install.rb", "init.rb", "MIT-LICENSE", "README", "lib", "uninstall.rb", "lib/puavo", "lib/puavo/organisation.rb", "lib/tasks", "lib/tasks/puavo_organisation.rake", "lib/puavo_organisation", "lib/puavo_organisation/controllers", "lib/puavo_organisation/controllers/helpers.rb", "rails", "rails/init.rb"]
+  s.files = ["Rakefile", "install.rb", "init.rb", "MIT-LICENSE", "README.rdoc", "lib", "uninstall.rb", "lib/puavo", "lib/puavo/organisation.rb", "lib/tasks", "lib/tasks/puavo_organisation.rake", "lib/puavo_organisation", "lib/puavo_organisation/controllers", "lib/puavo_organisation/controllers/helpers.rb", "rails", "rails/init.rb"]
   s.require_path = "lib"
   s.has_rdoc = false
-  s.extra_rdoc_files = ["README"]
+  s.extra_rdoc_files = ["README.rdoc"]
 end
 
