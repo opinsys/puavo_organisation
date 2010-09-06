@@ -1,6 +1,6 @@
 Puavo applications need this plugin for configuration of organisations. One Puavo application installation can serve many organisations.
 
-*Configuration* *file*: (config/organisation.yml)
+*Configuration* *file*: (config/organisations.yml)
 
 * host
   * Fully-qualified domain name. This information is used to identify the organisation's (eq. puavo.example.org)
