@@ -1,11 +1,19 @@
-== Puavo Organisation
+Puavo applications need this plugin for configuration of organisations. One Puavo application installation can serve many organisations.
 
-This is required plugin on the Puavo Users. Read more from the Puavo Users page. 
+*Configuration* *file*: (config/organisation.yml)
 
-== Features
-* Subdomain support
-* Locale by organisation
-* YML configuration file
+* host
+  * Fully-qualified domain name. This information is used to identify the organisation's (eq. puavo.example.org)
+* ldap_host
+  * LDAP server address
+* ldap_base
+  * Organisation's LDAP base (eq. dc=edu,dc=example,dc=org)
+* locale
+  * Default locale
+* owner
+  * Organisation's owner (this is only needed for Cucumber test)
+* owner_pw
+  * Organisation's onwer password (this is only needed for Cucumber test)
 
 == Copyright
 
