@@ -21,3 +21,22 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
+
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |s|
+    root_files = FileList["README.rdoc", "COPYING", "init.rb"]
+    s.name = "puavo_organisation"
+    s.summary = "Organisation configuration plugin for Puavo applications"
+    s.email = "puavo@opinsys.fi"
+    s.homepage = "http://github.com/opinsys/puavo_organisation"
+    s.description = "Organisation configuration plugin for Puavo applications"
+    s.authors = "Jouni Korhonen"
+    s.files =  root_files + FileList["{rails,lib}/**/*"]
+    s.extra_rdoc_files = root_files
+  end
+
+  Jeweler::GemcutterTasks.new
+rescue LoadError
+  puts "Jeweler, or one of its dependencies, is not available. Install it with: gem install jeweler"
+end
