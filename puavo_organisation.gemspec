@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{puavo_organisation}
-  s.version = "0.0.2"
+  s.version = "0.0.3"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jouni Korhonen"]
-  s.date = %q{2010-09-09}
+  s.date = %q{2011-01-07}
   s.description = %q{Organisation configuration plugin for Puavo applications}
   s.email = %q{puavo@opinsys.fi}
   s.extra_rdoc_files = [
