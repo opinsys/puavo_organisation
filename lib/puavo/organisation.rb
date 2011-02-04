@@ -12,7 +12,7 @@ module Puavo
     attr_accessor :organisation_key
 
     def schools
-      School.all
+      School.all_with_permissions
     end
 
     def value_by_key(key)
