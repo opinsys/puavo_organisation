@@ -11,8 +11,8 @@ module Puavo
     cattr_accessor :configurations, :key_by_host
     attr_accessor :organisation_key
 
-    def schools
-      School.all_with_permissions
+    def schools(user)
+      School.all_with_permissions user
     end
 
     def value_by_key(key)
