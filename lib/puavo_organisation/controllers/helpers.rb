@@ -2,6 +2,19 @@ module PuavoOrganisation
   module Controllers
     module Helpers
       def set_organisation_to_session
+
+        # Set organisation from oauth credentials
+        if credentials = oauth_credentials
+          dn = credentials[0]
+          organisation_name = dn.rdns[4]["dc"]
+          if organisation = Puavo::Organisation.find(organisation_name)
+            logger.debug "Got organisation #{ organisation_name } from OAuth"
+            session[:organisation] = organisation
+            return
+          end
+        end
+
+        # Set organisation from request.host
         if session[:organisation].nil?
           # Find organisation by request.host.
           # If you don't need multiple organisations you have to only set default organisation
