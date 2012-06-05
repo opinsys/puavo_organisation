@@ -4,14 +4,18 @@ module PuavoOrganisation
       def set_organisation_to_session
 
         # Set organisation from oauth credentials
-        if credentials = oauth_credentials
-          dn = credentials[0]
-          organisation_name = dn.rdns[4]["dc"]
-          if organisation = Puavo::Organisation.find(organisation_name)
-            logger.debug "Got organisation #{ organisation_name } from OAuth"
-            session[:organisation] = organisation
-            return
+        begin
+          if credentials = oauth_credentials
+            dn = credentials[0]
+            # TODO: get from oauth_credentials
+            organisation_name = dn.rdns[4]["dc"]
+            if organisation = Puavo::Organisation.find(organisation_name)
+              logger.debug "Got organisation #{ organisation_name } from OAuth"
+              session[:organisation] = organisation
+              return
+            end
           end
+        rescue AccessToken::Expired
         end
 
         # Set organisation from request.host
