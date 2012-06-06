@@ -6,10 +6,7 @@ module PuavoOrganisation
         # Set organisation from oauth credentials
         begin
           if credentials = oauth_credentials
-            dn = credentials[0]
-            # TODO: get from oauth_credentials
-            organisation_name = dn.rdns[4]["dc"]
-            if organisation = Puavo::Organisation.find(organisation_name)
+            if organisation = Puavo::Organisation.find(credentials[:host])
               logger.debug "Got organisation #{ organisation_name } from OAuth"
               session[:organisation] = organisation
               return
