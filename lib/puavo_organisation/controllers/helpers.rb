@@ -1,54 +1,43 @@
 module PuavoOrganisation
   module Controllers
     module Helpers
-      def set_organisation_to_session
 
-        # Set organisation from oauth credentials
+      def set_organisation_to_session
+          session[:organisation] = current_organisation
+          assert_organisation current_organisation
+      end
+
+      def current_organisation
+        return @current_organisation if @current_organisation
+
         begin
           if credentials = oauth_credentials
             if organisation = Puavo::Organisation.find(credentials[:host])
               logger.debug "Got organisation #{ organisation_name } from OAuth"
-              session[:organisation] = organisation
-              return
+              return @current_organisation = organisation
             end
           end
         rescue AccessToken::Expired
         end
 
-        # Set organisation from request.host
-        if session[:organisation].nil?
-          # Find organisation by request.host.
-          # If you don't need multiple organisations you have to only set default organisation
-          # with: config/organisations.yml
-          # default
-          #   name: Default organisation
-          #   host: *
-          session[:organisation] = Puavo::Organisation.find_by_host(request.host)
-          # Find default organisation (host == "*") if request host not found from configurations.
-          session[:organisation] = Puavo::Organisation.find_by_host("*") unless session[:organisation]
-          unless session[:organisation]
-            # FATAL error
-            # FIXME: redirect to login page?
-            # FIXME: text localization
-            render :text => "Can't find organisation."
-            return false
-          end
-        else
-          # Compare session host to client host. This is important security check.
-          unless session[:organisation].host == request.host || session[:organisation].host == "*"
-            # This is a serious problem. Some one trying to hack this system.
-            # FIXME, redirect to login page?
-            # FIXME: text localization
-            logger.info "Default organisation not found!"
-            render :text => "Session error"
-            return false
-          end
+        @current_organisation = Puavo::Organisation.find_by_host(request.host)
+        @current_organisation = Puavo::Organisation.find_by_host("*") unless @current_organisation
+        return @current_organisation
+
+      end
+
+      def assert_organisation(organisation)
+        # TODO fix for oauth?
+        unless organisation.host == request.host || organisation.host == "*"
+          # This is a serious problem. Some one trying to hack this system.
+          raise "die"
         end
       end
 
+
       def set_locale
-        I18n.locale = session[:organisation].value_by_key('locale') ?
-        session[:organisation].value_by_key('locale') : :en
+        I18n.locale = current_organisation.value_by_key('locale') ?
+        current_organisation.value_by_key('locale') : :en
       end
 
       def theme
